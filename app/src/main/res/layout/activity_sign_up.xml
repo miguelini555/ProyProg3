@@ -15,12 +15,14 @@
 
         <EditText
             android:id="@+id/etUsername"
+            android:textSize="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username" />
 
         <EditText
             android:id="@+id/SetEmail"
+            android:textSize="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -28,6 +30,7 @@
 
         <EditText
             android:id="@+id/SetPassword"
+            android:textSize="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"

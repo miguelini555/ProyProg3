@@ -7,6 +7,7 @@ android {
     namespace = "com.example.cumbiacoders"
     compileSdk = 35
 
+
     defaultConfig {
         applicationId = "com.example.cumbiacoders"
         minSdk = 29
@@ -32,6 +33,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    viewBinding {
+        enable = true
     }
 }
 
