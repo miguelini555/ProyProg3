@@ -1,6 +1,7 @@
     package com.example.cumbiacoders
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +16,14 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        val signUpButton: Button = findViewById(R.id.btnSignUp)
+        val logInButton: Button = findViewById(R.id.btnLogIn)
+
+        signUpButton.setOnClickListener {
+        }
+
+        logInButton.setOnClickListener {
         }
     }
 }
