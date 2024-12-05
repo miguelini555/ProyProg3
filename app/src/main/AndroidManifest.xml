@@ -13,17 +13,14 @@
         android:theme="@style/Theme.CumbiaCoders"
         tools:targetApi="31">
         <activity
-            android:name=".InteraccionVistasActivity"
-            android:exported="false" />
+            android:name=".LogInActivity"
+            android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LogInActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -34,5 +31,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

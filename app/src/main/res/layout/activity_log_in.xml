@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".LogInActivity">
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,24 +14,24 @@
         android:gravity="center">
 
         <EditText
-            android:id="@+id/LetEmail"
-            android:textSize="40dp"
+            android:id="@+id/enterEmailLogIn"
+            android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/LetPassword"
-            android:textSize="40dp"
+            android:id="@+id/enterPasswordLogIn"
+            android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/btnLogin1"
-            android:textSize="40dp"
+            android:id="@+id/btnLogin2"
+            android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Log In" />
