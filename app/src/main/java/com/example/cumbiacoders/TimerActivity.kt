@@ -25,20 +25,28 @@ class TimerActivity : AppCompatActivity() {
 
             if (totalTimeInMillis > 0) {
                 startTimer(totalTimeInMillis)
+                isPaused = false
             } else {
                 Toast.makeText(this, "Please enter a valid time!", Toast.LENGTH_SHORT).show()
             }
         }
 
+
         binding.btnPause.setOnClickListener {
             if (timer != null) {
                 if (isPaused) {
+
                     startTimer(timeRemaining)
                     isPaused = false
+                    binding.btnPause.text = "Pause"
                 } else {
+
                     timer?.cancel()
                     isPaused = true
+                    binding.btnPause.text = "Resume"
                 }
+            } else {
+                Toast.makeText(this, "No timer running to pause!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -66,6 +74,8 @@ class TimerActivity : AppCompatActivity() {
             override fun onFinish() {
                 binding.timerText.setText("00:00")
                 Toast.makeText(this@TimerActivity, "Timer finished!", Toast.LENGTH_SHORT).show()
+                binding.btnPause.text = "Pause"
+                isPaused = false
             }
         }
         timer?.start()
