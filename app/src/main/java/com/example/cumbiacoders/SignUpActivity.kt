@@ -10,7 +10,7 @@ import com.example.cumbiacoders.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding // Declare the View Binding variable
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +26,13 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp2.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
+            with(sharedPreferences.edit()) {
+                putBoolean("IS_LOGGED_IN", true)
+                apply()
+            }
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 }

@@ -20,6 +20,15 @@
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
+            val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
+            val isLoggedIn = sharedPreferences.getBoolean("IS_LOGGED_IN", false)
+
+            if (isLoggedIn) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
             binding.btnSignUp1.setOnClickListener {
                 val intent = Intent(this, SignUpActivity::class.java)
                 startActivity(intent)
