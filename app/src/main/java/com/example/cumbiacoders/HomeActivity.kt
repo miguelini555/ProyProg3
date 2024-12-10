@@ -1,5 +1,6 @@
 package com.example.cumbiacoders
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.startActivityButtonHome.setOnClickListener {
+            val intent = Intent(this,TimerActivity::class.java)
+            startActivity(intent)
 
         }
         binding.profileButtonHome.setOnClickListener {
