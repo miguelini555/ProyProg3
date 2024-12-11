@@ -2,6 +2,7 @@ package com.example.cumbiacoders
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,12 +20,10 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // Initialize Firebase Auth
-        auth = Firebase.auth
 
+        auth = Firebase.auth
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -33,28 +32,35 @@ class LogInActivity : AppCompatActivity() {
         }
 
         binding.btnLogin2.setOnClickListener {
-            val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
-            with(sharedPreferences.edit()) {
-                putBoolean("IS_LOGGED_IN", true)
-                apply()
+            val email = binding.enterEmailLogIn.text.toString().trim()
+            val password = binding.enterPasswordLogIn.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+            } else {
+                loginUsuario(email, password)
             }
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-
-        fun loginUsuario(){
-            val password: String = binding.enterPasswordLogIn.text.toString()
-            val email: String = binding.enterEmailLogIn.text.toString()
-            auth.signInWithEmailAndPassword("email", "password")
-                .addOnCompleteListener(this){ respuesta ->
-                    if(respuesta.isSuccessful){
-
-
-                    }
-                    else {
-
-                    }
-                    }
-                }
         }
     }
+
+    private fun loginUsuario(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
+                    with(sharedPreferences.edit()) {
+                        putBoolean("IS_LOGGED_IN", true)
+                        apply()
+                    }
+
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+
+                    val errorMessage = task.exception?.message ?: "Error al iniciar sesión"
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+}
