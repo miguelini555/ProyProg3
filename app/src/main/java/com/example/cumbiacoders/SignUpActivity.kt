@@ -34,5 +34,13 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
+        fun crearUsuario (){
+            auth.createUserWithEmailAndPassword("email", "password")
+                .addOnCompleteListener(this){
+
+                }
+
+        }
     }
 }
