@@ -35,6 +35,8 @@ class HomeActivity : AppCompatActivity() {
         binding.habitHistoryButtonHome.setOnClickListener {
 
         }
+        binding.addTaskButton.setOnClickListener {
 
+        }
         }
     }
