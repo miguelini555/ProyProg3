@@ -18,29 +18,30 @@ class TimerActivity : AppCompatActivity() {
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.btnStart.setOnClickListener {
-            val timeInput = binding.timerText.text.toString()
-            val totalTimeInMillis = parseTimeToMillis(timeInput)
-
-            if (totalTimeInMillis > 0) {
-                startTimer(totalTimeInMillis)
-                isPaused = false
+            if (binding.btnStart.text == "Restart") {
+                resetTimer()
             } else {
-                Toast.makeText(this, "Please enter a valid time!", Toast.LENGTH_SHORT).show()
+                val timeInput = binding.timerText.text.toString()
+                val totalTimeInMillis = parseTimeToMillis(timeInput)
+
+                if (totalTimeInMillis > 0) {
+                    startTimer(totalTimeInMillis)
+                    isPaused = false
+                    binding.btnStart.text = "Restart"
+                } else {
+                    Toast.makeText(this, "Please enter a valid time!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
 
         binding.btnPause.setOnClickListener {
             if (timer != null) {
                 if (isPaused) {
-
                     startTimer(timeRemaining)
                     isPaused = false
                     binding.btnPause.text = "Pause"
                 } else {
-
                     timer?.cancel()
                     isPaused = true
                     binding.btnPause.text = "Resume"
@@ -54,9 +55,10 @@ class TimerActivity : AppCompatActivity() {
     private fun parseTimeToMillis(time: String): Long {
         return try {
             val parts = time.split(":")
-            val minutes = parts[0].toInt()
-            val seconds = parts[1].toInt()
-            (minutes * 60 + seconds) * 1000L
+            val hours = parts[0].toInt()
+            val minutes = parts[1].toInt()
+            val seconds = parts[2].toInt()
+            (hours * 3600 + minutes * 60 + seconds) * 1000L
         } catch (e: Exception) {
             0L
         }
@@ -72,9 +74,10 @@ class TimerActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                binding.timerText.setText("00:00")
+                binding.timerText.setText("00:00:00")
                 Toast.makeText(this@TimerActivity, "Timer finished!", Toast.LENGTH_SHORT).show()
                 binding.btnPause.text = "Pause"
+                binding.btnStart.text = "Start"
                 isPaused = false
             }
         }
@@ -82,8 +85,20 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun formatMillisToTime(millis: Long): String {
-        val minutes = millis / 60000
+        val hours = millis / 3600000
+        val minutes = (millis % 3600000) / 60000
         val seconds = (millis % 60000) / 1000
-        return String.format("%02d:%02d", minutes, seconds)
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    private fun resetTimer() {
+        timer?.cancel()
+        timer = null
+        timeRemaining = 0
+        isPaused = false
+
+        binding.timerText.setText("00:00:00")
+        binding.btnPause.text = "Pause"
+        binding.btnStart.text = "Start"
     }
 }
