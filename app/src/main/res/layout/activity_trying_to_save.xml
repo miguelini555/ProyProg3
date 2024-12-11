@@ -8,7 +8,6 @@
     android:background="#FDE2E4"
     tools:context=".AchievementsActivity">
 
-    <!-- CardView del Título -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTitleAchievements"
         android:layout_width="0dp"
@@ -99,7 +98,6 @@
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Botón de retorno -->
     <Button
         android:id="@+id/buttonReturnToMenu"
         android:layout_width="wrap_content"

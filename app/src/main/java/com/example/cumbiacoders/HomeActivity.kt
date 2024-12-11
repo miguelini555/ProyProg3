@@ -33,6 +33,8 @@ class HomeActivity : AppCompatActivity() {
 
         }
         binding.achievementButtonHome.setOnClickListener {
+            val intent = Intent(this, AchievementesActivity ::class.java)
+            startActivity(intent)
 
         }
         binding.habitHistoryButtonHome.setOnClickListener {
