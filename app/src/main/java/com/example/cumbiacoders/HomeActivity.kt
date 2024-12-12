@@ -40,6 +40,10 @@ class HomeActivity : AppCompatActivity() {
         binding.habitHistoryButtonHome.setOnClickListener {
 
         }
+        binding.addHabitButton.setOnClickListener{
+            val intent = Intent(this,AddHabbitActivity :: class,java)
+            startActivity(intent)
+        }
 
         }
     }
