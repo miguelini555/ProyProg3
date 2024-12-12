@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.startActivityButtonHome.setOnClickListener {
-            val intent = Intent(this,TimerActivity::class.java)
+            val intent = Intent(this, TimerActivity::class.java)
             startActivity(intent)
 
         }
@@ -33,16 +33,12 @@ class HomeActivity : AppCompatActivity() {
 
         }
         binding.achievementButtonHome.setOnClickListener {
-            val intent = Intent(this, AchievementesActivity ::class.java)
+            val intent = Intent(this, AchievementesActivity::class.java)
             startActivity(intent)
 
         }
         binding.habitHistoryButtonHome.setOnClickListener {
 
-        }
-        binding.addHabitButton.setOnClickListener{
-            val intent = Intent(this,AddHabbitActivity :: class,java)
-            startActivity(intent)
         }
 
         }
