@@ -2,6 +2,7 @@ package com.example.cumbiacoders
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.cumbiacoders.databinding.ActivityLogInBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -35,10 +38,18 @@ class LogInActivity : AppCompatActivity() {
             val email = binding.enterEmailLogIn.text.toString().trim()
             val password = binding.enterPasswordLogIn.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
-            } else {
-                loginUsuario(email, password)
+            // Validaciones
+            when {
+                email.isEmpty() || password.isEmpty() -> {
+                    Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                }
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    Toast.makeText(this, "Por favor, ingresa un correo válido", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    binding.btnLogin2.isEnabled = false
+                    loginUsuario(email, password)
+                }
             }
         }
     }
@@ -46,6 +57,8 @@ class LogInActivity : AppCompatActivity() {
     private fun loginUsuario(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
+                binding.btnLogin2.isEnabled = true // Rehabilitar botón
+
                 if (task.isSuccessful) {
                     val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
@@ -57,8 +70,11 @@ class LogInActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-
-                    val errorMessage = task.exception?.message ?: "Error al iniciar sesión"
+                    val errorMessage = when (task.exception) {
+                        is FirebaseAuthInvalidCredentialsException -> "Credenciales inválidas, verifica tu contraseña"
+                        is FirebaseAuthInvalidUserException -> "El usuario no existe o fue deshabilitado"
+                        else -> task.exception?.message ?: "Error al iniciar sesión"
+                    }
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
