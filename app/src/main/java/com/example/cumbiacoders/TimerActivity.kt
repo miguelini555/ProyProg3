@@ -1,5 +1,6 @@
 package com.example.cumbiacoders
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
@@ -17,6 +18,11 @@ class TimerActivity : AppCompatActivity() {
 
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnReturnMenu.setOnClickListener{
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnStart.setOnClickListener {
             if (binding.btnStart.text == "Restart") {
