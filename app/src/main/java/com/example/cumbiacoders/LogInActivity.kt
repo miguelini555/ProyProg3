@@ -41,11 +41,15 @@ class LogInActivity : AppCompatActivity() {
             // Validaciones
             when {
                 email.isEmpty() || password.isEmpty() -> {
-                    Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT)
+                        .show()
                 }
+
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    Toast.makeText(this, "Por favor, ingresa un correo válido", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Por favor, ingresa un correo válido", Toast.LENGTH_SHORT)
+                        .show()
                 }
+
                 else -> {
                     binding.btnLogin2.isEnabled = false
                     loginUsuario(email, password)
@@ -60,16 +64,23 @@ class LogInActivity : AppCompatActivity() {
                 binding.btnLogin2.isEnabled = true // Rehabilitar botón
 
                 if (task.isSuccessful) {
-                    val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
-                    with(sharedPreferences.edit()) {
-                        putBoolean("IS_LOGGED_IN", true)
-                        apply()
+                    val user = auth.currentUser
+                    if (user != null) {
+                        val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
+                        with(sharedPreferences.edit()) {
+                            putBoolean("IS_LOGGED_IN", true)
+                            putString("USER_EMAIL", user.email)
+                            putString(
+                                "USER_NAME",
+                                user.email?.split("@")?.get(0) ?: "Unknown"
+                            )
+                            apply()
+                        }
+
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
-
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-
                 } else {
                     val errorMessage = when (task.exception) {
                         is FirebaseAuthInvalidCredentialsException -> "Credenciales inválidas, verifica tu contraseña"

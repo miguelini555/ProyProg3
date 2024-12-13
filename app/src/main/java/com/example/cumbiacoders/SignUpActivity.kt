@@ -38,14 +38,26 @@ class SignUpActivity : AppCompatActivity() {
 
             when {
                 email.isEmpty() || password.isEmpty() -> {
-                    Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT)
+                        .show()
                 }
+
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    Toast.makeText(this, "Por favor, ingresa un correo electrónico válido", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Por favor, ingresa un correo electrónico válido",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
                 password.length < 6 -> {
-                    Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "La contraseña debe tener al menos 6 caracteres",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
                 else -> {
                     crearUsuario(email, password)
                 }
@@ -57,10 +69,11 @@ class SignUpActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
                     val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
                     with(sharedPreferences.edit()) {
                         putBoolean("IS_LOGGED_IN", true)
+                        putString("USER_EMAIL", email)
+                        putString("USER_NAME", email.split("@")[0]) // Extract username from email
                         apply()
                     }
 
@@ -68,10 +81,11 @@ class SignUpActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-
                     val errorMessage = task.exception?.message ?: "Error al registrar usuario"
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
     }
 }
+
+
