@@ -30,17 +30,19 @@ class HomeActivity : AppCompatActivity() {
 
         }
         binding.profileButtonHome.setOnClickListener {
-
-        }
-        binding.achievementButtonHome.setOnClickListener {
-            val intent = Intent(this, AchievementesActivity ::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+
 
         }
         binding.habitHistoryButtonHome.setOnClickListener {
+            val intent = Intent(this, HabitHistoryActivity::class.java)
+            startActivity(intent)
 
         }
         binding.addTaskButton.setOnClickListener {
+            val intent = Intent(this, AddHabbitActivity::class.java)
+            startActivity(intent)
 
         }
         }
