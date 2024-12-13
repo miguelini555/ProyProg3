@@ -69,6 +69,7 @@ class LogInActivity : AppCompatActivity() {
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
+
                 } else {
                     val errorMessage = when (task.exception) {
                         is FirebaseAuthInvalidCredentialsException -> "Credenciales inválidas, verifica tu contraseña"
