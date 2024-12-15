@@ -6,5 +6,5 @@ data class Task(
     val id: Int,
     var title: String,
     var isCompleted: Boolean,
-    var date: String
+    var frequency: String
 ) : Serializable

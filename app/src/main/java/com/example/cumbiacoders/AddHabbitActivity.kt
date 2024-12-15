@@ -21,15 +21,13 @@ class AddHabbitActivity : AppCompatActivity() {
 
         // Botón para regresar al menú
         binding.btnReturn.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
+            finish() // Cierra la actividad sin devolver datos
         }
 
         // Botón para agregar un nuevo hábito
         binding.btnAddHabit.setOnClickListener {
             val habitName = binding.nombreHabbit.text.toString()
-            val habitTime = binding.etHora.text.toString()
+            val habitTime = binding.etHora.text.toString() // Si usas este campo
             val habitLabel = binding.etEtiqueta.text.toString()
 
             // Obtener la frecuencia seleccionada
@@ -42,7 +40,7 @@ class AddHabbitActivity : AppCompatActivity() {
             }
 
             // Validar entradas
-            if (habitName.isBlank() || habitTime.isBlank() || habitFrequency == null) {
+            if (habitName.isBlank() || habitFrequency == null) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -52,7 +50,7 @@ class AddHabbitActivity : AppCompatActivity() {
                 id = System.currentTimeMillis().toInt(),
                 title = habitName,
                 isCompleted = false,
-                date = habitFrequency // Guardar la frecuencia como la "sección" a la que pertenece
+                frequency = habitFrequency // Guardar la frecuencia directamente
             )
 
             // Devolver el objeto Task a HomeActivity como JSON

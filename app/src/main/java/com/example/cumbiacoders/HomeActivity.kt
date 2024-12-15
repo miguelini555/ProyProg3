@@ -51,10 +51,15 @@ class HomeActivity : AppCompatActivity() {
             val jsonTask = data?.getStringExtra("NEW_TASK")
             val task = gson.fromJson(jsonTask, Task::class.java)
 
-            // Agregar la tarea a la sección correspondiente
-            tasksByFrequency[task.date]?.add(task)
+            // Usa el campo `frequency` para determinar a qué lista agregar la tarea
+            when (task.frequency) {
+                "Hourly" -> tasksByFrequency["Hourly"]?.add(task)
+                "Daily" -> tasksByFrequency["Daily"]?.add(task)
+                "Weekly" -> tasksByFrequency["Weekly"]?.add(task)
+            }
+
             saveTasks() // Guarda las tareas en SharedPreferences
-            updateRecyclerViews() // Actualiza las vistas
+            updateRecyclerViews() // Actualiza los RecyclerView
         }
     }
 
