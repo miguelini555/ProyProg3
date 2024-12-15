@@ -86,27 +86,27 @@
 
                 <!-- Section: Hoy -->
                 <TextView
-                    android:id="@+id/todayTitle"
+                    android:id="@+id/dailyTitleTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Today - [Fecha de Hoy]"
+                    android:text="Daily Tasks"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/rojo"
                     android:paddingBottom="8dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/todayTasksRecyclerView"
+                    android:id="@+id/dailyTasksRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
 
                 <!-- Section: Mañana -->
                 <TextView
-                    android:id="@+id/tomorrowTitle"
+                    android:id="@+id/weeklyTasksTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="[Fecha de Mañana]"
+                    android:text="Weekly Tasks"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/rojo"
@@ -114,17 +114,17 @@
                     android:paddingBottom="8dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/tomorrowTasksRecyclerView"
+                    android:id="@+id/weeklyTasksRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
 
                 <!-- Section: Pasado Mañana -->
                 <TextView
-                    android:id="@+id/dayAfterTomorrowTitle"
+                    android:id="@+id/HourlyTasksTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" [Fecha de Pasado Mañana]"
+                    android:text="Hourly Tasks"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/rojo"
@@ -132,7 +132,7 @@
                     android:paddingBottom="8dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/dayAfterTomorrowTasksRecyclerView"
+                    android:id="@+id/hourlyTasksRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
