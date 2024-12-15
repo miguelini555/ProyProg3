@@ -3,7 +3,6 @@ package com.example.cumbiacoders
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cumbiacoders.adapters.TaskAdapter
 import com.example.cumbiacoders.databinding.ActivityHomeBinding
 import com.example.cumbiacoders.model.Task
@@ -13,11 +12,11 @@ import com.google.gson.reflect.TypeToken
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var todayAdapter: TaskAdapter
-    private lateinit var tomorrowAdapter: TaskAdapter
-    private lateinit var dayAfterTomorrowAdapter: TaskAdapter
+    private lateinit var hourlyAdapter: TaskAdapter
+    private lateinit var dailyAdapter: TaskAdapter
+    private lateinit var weeklyAdapter: TaskAdapter
 
-    private lateinit var tasksByDate: MutableMap<String, MutableList<Task>>
+    private lateinit var tasksByFrequency: MutableMap<String, MutableList<Task>>
     private lateinit var gson: Gson
     private val sharedPreferences by lazy { getSharedPreferences("TASKS_PREFS", MODE_PRIVATE) }
 
@@ -27,52 +26,39 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         gson = Gson()
-        tasksByDate = loadTasks()
+        tasksByFrequency = loadTasks()
 
         // Configure adapters
-        todayAdapter = TaskAdapter(tasksByDate["Hoy"] ?: mutableListOf()) { saveTasks() }
-        tomorrowAdapter = TaskAdapter(tasksByDate["Mañana"] ?: mutableListOf()) { saveTasks() }
-        dayAfterTomorrowAdapter = TaskAdapter(tasksByDate["Pasado Mañana"] ?: mutableListOf()) { saveTasks() }
+        hourlyAdapter = TaskAdapter(tasksByFrequency["Hourly"] ?: mutableListOf()) { saveTasks() }
+        dailyAdapter = TaskAdapter(tasksByFrequency["Daily"] ?: mutableListOf()) { saveTasks() }
+        weeklyAdapter = TaskAdapter(tasksByFrequency["Weekly"] ?: mutableListOf()) { saveTasks() }
 
-        binding.todayTasksRecyclerView.adapter = todayAdapter
-        binding.tomorrowTasksRecyclerView.adapter = tomorrowAdapter
-        binding.dayAfterTomorrowTasksRecyclerView.adapter = dayAfterTomorrowAdapter
+        binding.hourlyTasksRecyclerView.adapter = hourlyAdapter
+        binding.dailyTasksRecyclerView.adapter = dailyAdapter
+        binding.weeklyTasksRecyclerView.adapter = weeklyAdapter
 
-        // Button listeners
-        binding.startActivityButtonHome.setOnClickListener {
-            val intent = Intent(this, TimerActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.profileButtonHome.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.habitHistoryButtonHome.setOnClickListener {
-            val intent = Intent(this, HabitHistoryActivity::class.java)
-            startActivity(intent)
-        }
-
+        // Botón para agregar una nueva tarea
         binding.addTaskButton.setOnClickListener {
             val intent = Intent(this, AddHabbitActivity::class.java)
             startActivityForResult(intent, ADD_TASK_REQUEST)
         }
     }
 
-    // Handle results from AddTaskActivity
+    // Manejar el resultado de AddHabitActivity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_TASK_REQUEST && resultCode == RESULT_OK) {
             val jsonTask = data?.getStringExtra("NEW_TASK")
             val task = gson.fromJson(jsonTask, Task::class.java)
-            tasksByDate[task.date]?.add(task)
-            saveTasks()
-            updateRecyclerViews()
+
+            // Agregar la tarea a la sección correspondiente
+            tasksByFrequency[task.date]?.add(task)
+            saveTasks() // Guarda las tareas en SharedPreferences
+            updateRecyclerViews() // Actualiza las vistas
         }
     }
 
-    // Load tasks from SharedPreferences
+    // Cargar tareas desde SharedPreferences
     private fun loadTasks(): MutableMap<String, MutableList<Task>> {
         val jsonString = sharedPreferences.getString("TASKS", null)
         return if (jsonString != null) {
@@ -80,27 +66,27 @@ class HomeActivity : AppCompatActivity() {
             gson.fromJson(jsonString, type)
         } else {
             mutableMapOf(
-                "Hoy" to mutableListOf(),
-                "Mañana" to mutableListOf(),
-                "Pasado Mañana" to mutableListOf()
+                "Hourly" to mutableListOf(),
+                "Daily" to mutableListOf(),
+                "Weekly" to mutableListOf()
             )
         }
     }
 
-    // Save tasks to SharedPreferences
+    // Guardar tareas en SharedPreferences
     private fun saveTasks() {
-        val jsonString = gson.toJson(tasksByDate)
+        val jsonString = gson.toJson(tasksByFrequency)
         with(sharedPreferences.edit()) {
             putString("TASKS", jsonString)
             apply()
         }
     }
 
-    // Update RecyclerViews
+    // Actualizar los RecyclerViews
     private fun updateRecyclerViews() {
-        todayAdapter.notifyDataSetChanged()
-        tomorrowAdapter.notifyDataSetChanged()
-        dayAfterTomorrowAdapter.notifyDataSetChanged()
+        hourlyAdapter.notifyDataSetChanged()
+        dailyAdapter.notifyDataSetChanged()
+        weeklyAdapter.notifyDataSetChanged()
     }
 
     companion object {
