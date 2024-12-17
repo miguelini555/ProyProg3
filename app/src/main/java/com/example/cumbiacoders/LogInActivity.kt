@@ -56,6 +56,10 @@ class LogInActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.btnLogReturn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loginUsuario(email: String, password: String) {
