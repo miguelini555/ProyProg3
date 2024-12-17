@@ -38,7 +38,7 @@ class AddHabitActivity : AppCompatActivity() {
             val hora = horaHabit.text.toString().trim()
             val categoria = obtenerCategoriaSeleccionada()
 
-            if (nombre.isNotEmpty() && hora.isNotEmpty() && categoria.isNotEmpty()) {
+            if (nombre.isNotEmpty() && hora.isNotEmpty() || categoria.isNotEmpty()) {
                 val habit = Habit(nombre, hora, categoria)
                 guardarHabit(habit)
                 Toast.makeText(this, "Hábito guardado exitosamente", Toast.LENGTH_SHORT).show()
@@ -54,7 +54,6 @@ class AddHabitActivity : AppCompatActivity() {
         }
     }
 
-    // Obtener la categoría seleccionada del RadioGroup
     private fun obtenerCategoriaSeleccionada(): String {
         val selectedId = rgFrecuencia.checkedRadioButtonId
         return if (selectedId != -1) {
