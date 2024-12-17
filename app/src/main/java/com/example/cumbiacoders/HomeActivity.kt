@@ -85,6 +85,7 @@ class HomeActivity : AppCompatActivity() {
         monthlyAdapter.actualizarLista(habits.filter { it.categoria == "Monthly" })
     }
 
+
     override fun onResume() {
         super.onResume()
         cargarHabits() // Volver a cargar tareas al regresar a HomeActivity
