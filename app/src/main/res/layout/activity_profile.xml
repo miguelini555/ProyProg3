@@ -74,12 +74,27 @@
 
         <Button
             android:id="@+id/saveChangesButton"
-            android:layout_width="290dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/rojo"
             android:text="Save Changes"
-            android:backgroundTint="@color/black"
-            android:textColor="@color/crema"
-            android:layout_marginTop="16dp" />
+            android:textColor="@color/crema" />
+
+        <Button
+            android:id="@+id/btnReturnProfile"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rojo"
+            android:text="Return Home" />
+
+        <Button
+            android:id="@+id/btnLogOut"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/rojo"
+            android:text="Log Out" />
+
 
     </LinearLayout>
 

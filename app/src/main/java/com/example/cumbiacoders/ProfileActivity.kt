@@ -1,5 +1,7 @@
 package com.example.cumbiacoders
 
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -53,5 +55,22 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "Cambios guardados exitosamente", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.btnLogOut.setOnClickListener {
+            logout()
+        }
+    }
+
+    private fun logout() {
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        val habitsPrefs = getSharedPreferences("habits_prefs", Context.MODE_PRIVATE)
+        habitsPrefs.edit().clear().apply()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }
