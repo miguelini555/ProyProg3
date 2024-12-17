@@ -113,6 +113,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        cargarHabits()
+        cargarHabits() // Recargar hábitos al regresar a HomeActivity
     }
 }
