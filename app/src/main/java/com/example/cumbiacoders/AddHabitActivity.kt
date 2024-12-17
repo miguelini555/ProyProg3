@@ -14,7 +14,6 @@ import com.google.gson.reflect.TypeToken
 
 class AddHabitActivity : AppCompatActivity() {
 
-    // Declaración de las vistas
     private lateinit var nombreHabit: EditText
     private lateinit var horaHabit: EditText
     private lateinit var rgFrecuencia: RadioGroup
@@ -25,14 +24,13 @@ class AddHabitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_habbit)
 
-        // Inicialización de las vistas
         nombreHabit = findViewById(R.id.nombreHabbit)
         horaHabit = findViewById(R.id.etHora)
         rgFrecuencia = findViewById(R.id.rgFrecuencia)
         btnAddHabit = findViewById(R.id.btnAddHabit)
-        btnReturn = findViewById(R.id.btnReturn) // Inicializa el botón Return
+        btnReturn = findViewById(R.id.btnReturn)
 
-        // Acción para el botón "Add Habit"
+
         btnAddHabit.setOnClickListener {
             val nombre = nombreHabit.text.toString().trim()
             val hora = horaHabit.text.toString().trim()
@@ -42,16 +40,17 @@ class AddHabitActivity : AppCompatActivity() {
                 val habit = Habit(nombre, hora, categoria)
                 guardarHabit(habit)
                 Toast.makeText(this, "Hábito guardado exitosamente", Toast.LENGTH_SHORT).show()
-                finish() // Cierra la actividad
+                finish()
             } else {
                 Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Acción para el botón "Return"
+
         btnReturn.setOnClickListener {
-            finish() // Cierra la actividad y regresa a la anterior
+            finish()
         }
+
     }
 
     private fun obtenerCategoriaSeleccionada(): String {
@@ -64,7 +63,7 @@ class AddHabitActivity : AppCompatActivity() {
         }
     }
 
-    // Guardar el hábito en SharedPreferences
+
     private fun guardarHabit(habit: Habit) {
         val sharedPreferences = getSharedPreferences("habits_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -78,7 +77,6 @@ class AddHabitActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    // Cargar la lista actual de hábitos
     private fun cargarHabits(): MutableList<Habit> {
         val sharedPreferences = getSharedPreferences("habits_prefs", Context.MODE_PRIVATE)
         val json = sharedPreferences.getString("habits", null)
