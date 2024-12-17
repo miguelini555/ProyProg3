@@ -50,6 +50,9 @@ class TimerActivity : AppCompatActivity() {
                 Toast.makeText(this, "No timer running to pause!", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.btnReturnMenu.setOnClickListener {
+            finish()
+        }
     }
 
     private fun parseTimeToMillis(time: String): Long {
