@@ -9,7 +9,6 @@ import com.example.cumbiacoders.databinding.ItemHabitBinding
 class HabitAdapter(private val listaHabitos: MutableList<Habit>) :
     RecyclerView.Adapter<HabitAdapter.HabitViewHolder>() {
 
-    // ViewHolder: Representa cada ítem en el RecyclerView
     class HabitViewHolder(val binding: ItemHabitBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(habit: Habit) {
             binding.textViewNombre.text = habit.nombre
