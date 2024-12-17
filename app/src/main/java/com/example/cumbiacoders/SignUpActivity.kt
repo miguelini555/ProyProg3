@@ -63,6 +63,10 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.btnSignReturn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun crearUsuario(email: String, password: String) {

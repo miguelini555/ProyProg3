@@ -53,6 +53,14 @@
             android:textSize="30sp"
             android:text="Sign Up"
             android:backgroundTint="@color/rojo"/>
+        <Button
+            android:id="@+id/btnSignReturn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Return"
+            android:textSize="30sp"
+            android:backgroundTint="@color/rojo"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
