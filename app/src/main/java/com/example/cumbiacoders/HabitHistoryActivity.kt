@@ -1,6 +1,7 @@
 package com.example.cumbiacoders
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,11 @@ class HabitHistoryActivity : AppCompatActivity() {
 
         binding = ActivityHabitHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnReturnMenu.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
 
         setUpRecyclerViews()
         loadHistory()

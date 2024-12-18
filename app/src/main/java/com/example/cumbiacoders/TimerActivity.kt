@@ -1,5 +1,6 @@
 package com.example.cumbiacoders
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
@@ -51,7 +52,8 @@ class TimerActivity : AppCompatActivity() {
             }
         }
         binding.btnReturnMenu.setOnClickListener {
-            finish()
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 
