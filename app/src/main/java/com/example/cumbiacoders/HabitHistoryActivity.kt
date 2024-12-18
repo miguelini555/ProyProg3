@@ -22,9 +22,10 @@ class HabitHistoryActivity : AppCompatActivity() {
         binding = ActivityHabitHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnReturnMenu.setOnClickListener {
+        binding.btnReturnMenuHh.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         setUpRecyclerViews()
