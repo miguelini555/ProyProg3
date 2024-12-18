@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.cumbiacoders.databinding.ActivityTimerBinding
 
 class TimerActivity : AppCompatActivity() {
@@ -24,6 +25,8 @@ class TimerActivity : AppCompatActivity() {
                 resetTimer()
             } else {
                 val timeInput = binding.timerText.text.toString()
+                binding.label.text="In process"
+                Glide.with(this).load(R.drawable.disc_moving).into(binding.disc)
                 val totalTimeInMillis = parseTimeToMillis(timeInput)
 
                 if (totalTimeInMillis > 0) {
@@ -42,10 +45,13 @@ class TimerActivity : AppCompatActivity() {
                     startTimer(timeRemaining)
                     isPaused = false
                     binding.btnPause.text = "Pause"
+
                 } else {
                     timer?.cancel()
                     isPaused = true
                     binding.btnPause.text = "Resume"
+                    binding.label.text="On Break"
+                    Glide.with(this).load(R.drawable.disc).into(binding.disc)
                 }
             } else {
                 Toast.makeText(this, "No timer running to pause!", Toast.LENGTH_SHORT).show()
@@ -105,5 +111,7 @@ class TimerActivity : AppCompatActivity() {
         binding.timerText.setText("00:00:00")
         binding.btnPause.text = "Pause"
         binding.btnStart.text = "Start"
+        binding.label.text="Start An Activity"
+        Glide.with(this).load(R.drawable.disc).into(binding.disc)
     }
 }
