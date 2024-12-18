@@ -9,7 +9,6 @@
     tools:context=".ProfileActivity"
     android:background="@color/crema">
 
-
     <TextView
         android:id="@+id/profileTitle"
         android:layout_width="wrap_content"
@@ -18,7 +17,7 @@
         android:padding="10dp"
         android:background="@color/rojo"
         android:text="PROFILE"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textColor="@color/crema"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,59 +41,92 @@
             android:scaleType="centerCrop"
             android:src="@drawable/usericon" />
 
-
-        <EditText
-            android:id="@+id/usernameEditText"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="Username"
-            android:text="User123"
-            android:inputType="textPersonName" />
-
-
-        <TextView
-            android:id="@+id/emailText"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="pepito123@gmail.com"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center_horizontal" />
-
-
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="••••••••"
-            android:inputType="textPassword"/>
-
-        <Button
-            android:id="@+id/saveChangesButton"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profilecard"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/rojo"
-            android:text="Save Changes"
-            android:textColor="@color/crema" />
+            app:cardCornerRadius="56dp"
+            android:layout_marginHorizontal="18dp"
+            app:cardElevation="8dp">
 
-        <Button
-            android:id="@+id/btnReturnProfile"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/rojo"
-            android:text="Return Home" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnLogOut"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/rojo"
-            android:text="Log Out" />
+                <EditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="30dp"
+                    android:hint="Username"
+                    android:text="User123"
+                    android:inputType="textPersonName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/emailText"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="pepito123@gmail.com"
+                    android:layout_marginTop="5dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/usernameEditText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="••••••••"
+                    android:inputType="textPassword"
+                    app:layout_constraintTop_toBottomOf="@id/emailText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="66dp"
+                    android:backgroundTint="@color/rojo"
+                    android:text="Save Changes"
+                    android:textColor="@color/crema"
+                    app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/btnReturnProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/rojo"
+                    android:text="Return Home"
+                    app:layout_constraintTop_toTopOf="@id/saveChangesButton"
+                    app:layout_constraintStart_toEndOf="@id/saveChangesButton"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <Button
+                    android:id="@+id/btnLogOut"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/rojo"
+                    android:text="Log Out"
+                    app:layout_constraintTop_toBottomOf="@id/btnReturnProfile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
