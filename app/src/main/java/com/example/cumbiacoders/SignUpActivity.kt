@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnSignUp2.setOnClickListener {
             val email = binding.enterEmailSignUp.text.toString().trim()
-            val password = binding.enterEmailSignUp.text.toString().trim()
+            val password = binding.enterPasswordSignUp.text.toString().trim()
 
             when {
                 email.isEmpty() || password.isEmpty() -> {
@@ -66,9 +66,9 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnSignReturn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
-
     private fun crearUsuario(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -77,15 +77,13 @@ class SignUpActivity : AppCompatActivity() {
                     with(sharedPreferences.edit()) {
                         putBoolean("IS_LOGGED_IN", true)
                         putString("USER_EMAIL", email)
-                        putString("USER_NAME", email.split("@")[0]) // Extract username from email
                         apply()
                     }
-
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
-                    val errorMessage = task.exception?.message ?: "Error al registrar usuario"
+                    val errorMessage = task.exception?.message ?: "Error al registrarse"
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }

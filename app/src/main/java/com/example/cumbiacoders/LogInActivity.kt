@@ -59,6 +59,7 @@ class LogInActivity : AppCompatActivity() {
         binding.btnLogReturn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -73,11 +74,8 @@ class LogInActivity : AppCompatActivity() {
                         val sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
                         with(sharedPreferences.edit()) {
                             putBoolean("IS_LOGGED_IN", true)
-                            putString("USER_EMAIL", user.email)
-                            putString(
-                                "USER_NAME",
-                                user.email?.split("@")?.get(0) ?: "Unknown"
-                            )
+                            putString("USER_EMAIL", email)
+                            putString("USER_NAME", email.split("@")[0])
                             apply()
                         }
 
