@@ -58,6 +58,9 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnLogOut.setOnClickListener {
             logout()
         }
+        binding.btnReturnProfile.setOnClickListener {
+            finish()
+        }
     }
 
     private fun logout() {
