@@ -8,8 +8,18 @@
     android:layout_height="match_parent"
     android:background="@color/crema"
     tools:context=".HabitHistoryActivity">
+    <Button
+        android:id="@+id/btn_return_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return to menu"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF8C8C"
+        android:layout_marginTop="36dp"
+        android:padding="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentStart="true" />
 
-    <!-- Title Section -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -22,7 +32,7 @@
         android:text="Habit History"
         android:textColor="@color/crema"
         android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_return_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
