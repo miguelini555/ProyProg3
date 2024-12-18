@@ -11,16 +11,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cumbiacoders.databinding.ActivityProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("USER_PREFS", MODE_PRIVATE)
@@ -44,7 +49,11 @@ class ProfileActivity : AppCompatActivity() {
             val newUsername = usernameEditText.text.toString()
 
             if (newUsername.isBlank()) {
-                Toast.makeText(this, "El nombre de usuario no puede estar vacío", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "El nombre de usuario no puede estar vacío",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
 
                 with(sharedPreferences.edit()) {
@@ -64,15 +73,18 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun logout() {
+
+        val sharedPreferences = getSharedPreferences("USER_PREFS", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.clear()
+        editor.remove("IS_LOGGED_IN")
         editor.apply()
+
 
         val habitsPrefs = getSharedPreferences("habits_prefs", Context.MODE_PRIVATE)
         habitsPrefs.edit().clear().apply()
 
+        auth.signOut()
         val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
