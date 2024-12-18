@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginHorizontal="10dp"
                 android:text="Task Name"
-                android:textSize="25sp"
+                android:textSize="21sp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingEnd="8dp" />
@@ -46,7 +46,7 @@
                 app:layout_constraintEnd_toEndOf="@id/textViewNombre"
                 app:layout_constraintTop_toBottomOf="@id/textViewNombre"
                 android:text="Time"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingEnd="8dp" />
